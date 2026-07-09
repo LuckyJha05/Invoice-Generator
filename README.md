@@ -41,6 +41,6 @@ invoice-generator/
 
 ## 👨‍💻 Author
 
-**Lucky Jha**
+LuckyJha05
 
 GitHub: https://github.com/LuckyJha05
