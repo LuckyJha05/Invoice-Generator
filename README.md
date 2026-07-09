@@ -1,3 +1,4 @@
+</Markdown>
 # 🧾 Invoice Generator
 
 A modern Invoice Generator web application built with **React**, **Vite**, **Tailwind CSS**, **Ant Design**, and **Lucide React**. This application helps users create professional invoices through a simple and user-friendly interface.
@@ -23,7 +24,7 @@ A modern Invoice Generator web application built with **React**, **Vite**, **Tai
 
 ## 📂 Project Structure
 
-```
+```text
 invoice-generator/
 │── public/
 │── src/
