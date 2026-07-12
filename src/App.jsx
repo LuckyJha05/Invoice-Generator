@@ -19,6 +19,7 @@ const App = () => {
   const [open, setOpen] = useState(false);
   const [invoice, setInvoice] = useState(null);
   const [form] = Form.useForm();
+  const paymentMethod = Form.useWatch("paymentMethod", form);
 
   const handleClose = () => {
     setOpen(false);
@@ -190,18 +191,32 @@ const App = () => {
         <div className="flex justify-between items-start border-b pb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-800">INVOICE</h1>
-            <p className="text-sm text-gray-500 mt-1">Invoice #INV-{invoice?.invoiceNumber || "0001"}</p>
-            <p className="text-sm text-gray-500">Date: {invoice?.invoiceDate || "01 Jan 2026"}</p>
+            <p className="text-sm text-gray-500 mt-1">
+              Invoice #INV-{invoice?.invoiceNumber || "0001"}
+            </p>
+            <p className="text-sm text-gray-500">
+              Date: {invoice?.invoiceDate || "01 Jan 2026"}
+            </p>
           </div>
 
           <div className="text-right">
             <h2 className="text-lg font-semibold text-gray-800">
               {invoice?.companyName || "ABC Solutions Pvt Ltd"}
             </h2>
-            <p className="text-sm text-gray-500">{invoice?.companyWebsite || "www.example.com"}</p>
-            <p className="text-sm text-gray-500">{invoice?.companyAddress || "123 Business Street"}</p>
-            <p className="text-sm text-gray-500">{invoice?.companyState || "Uttar Pradesh"}, {invoice?.companyCountry || "India"} – {invoice?.companyPincode || "110001"}</p>
-            <p className="text-sm text-gray-500">GSTIN: {invoice?.companyGSTNumber || "00ABCDE0000Z0Z0"}</p>
+            <p className="text-sm text-gray-500">
+              {invoice?.companyWebsite || "www.example.com"}
+            </p>
+            <p className="text-sm text-gray-500">
+              {invoice?.companyAddress || "123 Business Street"}
+            </p>
+            <p className="text-sm text-gray-500">
+              {invoice?.companyState || "Uttar Pradesh"},{" "}
+              {invoice?.companyCountry || "India"} –{" "}
+              {invoice?.companyPincode || "110001"}
+            </p>
+            <p className="text-sm text-gray-500">
+              GSTIN: {invoice?.companyGSTNumber || "00ABCDE0000Z0Z0"}
+            </p>
           </div>
         </div>
 
@@ -217,7 +232,9 @@ const App = () => {
               {invoice?.customerAddress || "456 Client Road"}
             </p>
             <p className="text-sm text-gray-500">
-              {invoice?.customerState || "Maharashtra"}, {invoice?.customerCountry || "India"} – {invoice?.customerPincode || "400001"}
+              {invoice?.customerState || "Maharashtra"},{" "}
+              {invoice?.customerCountry || "India"} –{" "}
+              {invoice?.customerPincode || "400001"}
             </p>
             <p className="text-sm text-gray-500">
               Email: {invoice?.customerEmail || "client@example.com"}
@@ -231,8 +248,17 @@ const App = () => {
             <p className="text-sm text-gray-500">
               Payment Method: {invoice?.paymentMethod || "Bank Transfer"}
             </p>
-            <p className="text-sm text-gray-500">Transaction ID: {invoice?.transactionId || "PAY123456"}</p>
-            <p className="text-sm text-gray-500">Due Date: {invoice?.dueDate || "10 Jan 2026"}</p>
+            {invoice?.paymentMethod !== "cash" && (
+              <p className="text-sm text-gray-500">
+                Transaction ID: {invoice?.transactionId || "PAY123456"}
+              </p>
+            )}
+            <p className="text-sm text-gray-500">
+              Transaction ID: {invoice?.transactionId || "PAY123456"}
+            </p>
+            <p className="text-sm text-gray-500">
+              Due Date: {invoice?.dueDate || "10 Jan 2026"}
+            </p>
           </div>
         </div>
 
@@ -249,17 +275,25 @@ const App = () => {
             <tbody className="text-sm text-gray-700">
               {invoice?.products?.map((product, index) => (
                 <tr key={index}>
-                  <td className="p-3 border">{product.item || "Software Development Service"}</td>
+                  <td className="p-3 border">
+                    {product.item || "Software Development Service"}
+                  </td>
                   <td className="p-3 border text-right">{product.qty || 1}</td>
-                  <td className="p-3 border text-right">₹{product.rate?.toFixed(2) || "10,000.00"}</td>
-                  <td className="p-3 border text-right">₹{product.amount?.toFixed(2) || "10,000.00"}</td>
+                  <td className="p-3 border text-right">
+                    ₹{product.rate?.toFixed(2) || "10,000.00"}
+                  </td>
+                  <td className="p-3 border text-right">
+                    ₹{product.amount?.toFixed(2) || "10,000.00"}
+                  </td>
                 </tr>
               ))}
               <tr>
                 <td className="p-3 border">GST ({invoice?.gstRate || 18}%)</td>
                 <td className="p-3 border text-right">—</td>
                 <td className="p-3 border text-right">—</td>
-                <td className="p-3 border text-right">₹{invoice?.tax?.toFixed(2) || "1,800.00"}</td>
+                <td className="p-3 border text-right">
+                  ₹{invoice?.tax?.toFixed(2) || "1,800.00"}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -269,11 +303,15 @@ const App = () => {
           <div className="w-1/3">
             <div className="flex justify-between text-sm mb-2">
               <span className="text-gray-600">SubTotal</span>
-              <span className="text-gray-800">₹{invoice?.subTotal?.toFixed(2) || "10,000.00"}</span>
+              <span className="text-gray-800">
+                ₹{invoice?.subTotal?.toFixed(2) || "10,000.00"}
+              </span>
             </div>
             <div className="flex justify-between text-sm mb-2">
               <span className="text-gray-600">Tax</span>
-              <span className="text-gray-800">₹{invoice?.tax?.toFixed(2) || "1,800.00"}</span>
+              <span className="text-gray-800">
+                ₹{invoice?.tax?.toFixed(2) || "1,800.00"}
+              </span>
             </div>
             <div className="flex justify-between text-base font-semibold border-t pt-2">
               <span>Total</span>
@@ -288,8 +326,8 @@ const App = () => {
           </p>
         </div>
       </div>
-      <div className='print:hidden fixed -translate-y-1/2 top-1/2 left-0 bg-white rounded-r-lg p-4 flex flex-col gap-4 shadow-lg'>
-        <Tooltip title="Create a new invoice" className='!print:hidden'>
+      <div className="print:hidden fixed -translate-y-1/2 top-1/2 left-0 bg-white rounded-r-lg p-4 flex flex-col gap-4 shadow-lg">
+        <Tooltip title="Create a new invoice" className="!print:hidden">
           <button
             onClick={() => setOpen(true)}
             className="bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80"
@@ -297,9 +335,12 @@ const App = () => {
             <Plus />
           </button>
         </Tooltip>
-          <button onClick={() => window.print()} className="bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80">
-            <Printer />
-          </button>
+        <button
+          onClick={() => window.print()}
+          className="bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80"
+        >
+          <Printer />
+        </button>
       </div>
       <Drawer
         open={open}
@@ -309,12 +350,15 @@ const App = () => {
       >
         <div>
           <Form
-          form={form}
+            form={form}
             layout="vertical"
             onFinish={onFinish}
             className="grid grid-cols-2 gap-x-6"
           >
             {formSchema.map((item) => {
+              if (item.name === "transactionId" && paymentMethod === "cash") {
+                return null;
+              }
               if (item.name === "gstRate") {
                 return (
                   <Form.Item
