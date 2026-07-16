@@ -153,7 +153,7 @@ const App = () => {
       name: "transactionId",
       type: "text",
       placeholder: "Enter transaction ID",
-      required: false,
+      required: true,
     },
     {
       label: "Due Date",
@@ -165,6 +165,8 @@ const App = () => {
     {
       label: "Gst rate",
       name: "gstRate",
+      type: "text",
+      placeholder: "Enter GST rate",
       required: false,
     },
   ];
@@ -253,9 +255,6 @@ const App = () => {
                 Transaction ID: {invoice?.transactionId || "PAY123456"}
               </p>
             )}
-            <p className="text-sm text-gray-500">
-              Transaction ID: {invoice?.transactionId || "PAY123456"}
-            </p>
             <p className="text-sm text-gray-500">
               Due Date: {invoice?.dueDate || "10 Jan 2026"}
             </p>
