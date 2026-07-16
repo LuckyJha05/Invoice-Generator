@@ -49,19 +49,19 @@ const App = () => {
       label: "Company Website",
       name: "companyWebsite",
       placeholder: "Enter company website",
-      required: true,
+      required: false,
     },
     {
       label: "Company Email",
       name: "companyEmail",
       placeholder: "Enter company email",
-      required: true,
+      required: false,
     },
     {
       label: "Company Address",
       name: "companyAddress",
       placeholder: "Enter company address",
-      required: true,
+      required: false,
     },
     {
       label: "Company State",
@@ -82,14 +82,14 @@ const App = () => {
       name: "companyPincode",
       type: "text",
       placeholder: "Enter company pincode",
-      required: true,
+      required: false,
     },
     {
       label: "Company GST Number",
       name: "companyGSTNumber",
       type: "text",
       placeholder: "Enter company GST number",
-      required: true,
+      required: false,
     },
     {
       label: "Customer Name",
@@ -101,7 +101,7 @@ const App = () => {
       label: "Customer Email",
       name: "customerEmail",
       placeholder: "Enter customer email",
-      required: true,
+      required: false,
     },
     {
       label: "Customer Address",
@@ -128,7 +128,7 @@ const App = () => {
       name: "customerPincode",
       type: "text",
       placeholder: "Enter customer pincode",
-      required: true,
+      required: false,
     },
     {
       label: "Choose payment method",
@@ -153,7 +153,7 @@ const App = () => {
       name: "transactionId",
       type: "text",
       placeholder: "Enter transaction ID",
-      required: true,
+      required: false,
     },
     {
       label: "Due Date",
@@ -165,7 +165,7 @@ const App = () => {
     {
       label: "Gst rate",
       name: "gstRate",
-      required: true,
+      required: false,
     },
   ];
   const onFinish = (values) => {
